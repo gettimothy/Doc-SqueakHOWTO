@@ -1,49 +1,1 @@
-
-# Table of Contents
-
-1.  [SqueakHOWTO [SqueakHOWTOHelp]](#org9c57090)
-    1.  [Introduction](#orgbafb293)
-    2.  [Howto Fix RTPRIO stuff](#orge47880c)
-    3.  [Howto Fix Expired SSL Cert Issue In Monticello](#org970eb48)
-
-
-<a id="org9c57090"></a>
-
-# SqueakHOWTO [SqueakHOWTOHelp]
-
-
-<a id="orgbafb293"></a>
-
-## Introduction
-
-    This is catch-all help for odd-ball squeak HOWTO issues.
-
-
-<a id="orge47880c"></a>
-
-## Howto Fix RTPRIO stuff
-
-    have at it folks!
-
-
-<a id="org970eb48"></a>
-
-## Howto Fix Expired SSL Cert Issue In Monticello
-
-    
-    Context: On October 1 2021 Monticello would not let me open the squeaksource.com  repository.
-    
-    After much emailing at the board, it was determined that ...
-    1. squeaksource.com uses a funky certificate provider or something.
-    2. the problem was on my (a typical user) side of things.
-    3. this website gives us hoops to jump through:  https://www.openssl.org/blog/blog/2021/09/13/LetsEncryptRootCertExpire/
-    
-    
-    
-    This fix worked for me:
-    
-    su root
-    cd /etc/ssl/certs.
-    update-ca-certificate
-    mv DST_Root_CA_X3.pem  ~/   (or delete it)
-
+# Table of Contents1.  [SqueakHOWTO [SqueakHOWTOHelp]](#orge642345)    1.  [Introduction](#org928ce2b)    2.  [Close All Inspectors HOWTO](#orga2509b9)    3.  [Background image HOWTO](#orgf4d631b)    4.  [Compile Spur64 on Slackware Linux HOWTO](#org8735894)    5.  [Expired SSL Cert Issue In Monticello HOWTO](#org6446a6a)    6.  [RTPRIO warnings HOWTO](#org66babb3)    7.  [Blocks Try Catch Finally  HOWTO](#orgfb5ba76)<a id="orge642345"></a># SqueakHOWTO [SqueakHOWTOHelp]<a id="org928ce2b"></a>## Introduction    This is catch-all help for odd-ball squeak HOWTO issues.<a id="orga2509b9"></a>## Close All Inspectors HOWTO    World submorphs do: [ :e |          [ (e model isKindOf: Inspector) ifTrue: [ e delete ] ]             on: Error             do: [ ] ]            World submorphs do: [ :e |          [ (e class name = #StickySketchMorph) ifTrue: [ e delete ] ]             on: Error             do: [ ] ]<a id="orgf4d631b"></a>## Background image HOWTO        1. Tools -> FileList    2. Browse to the image file you want.    3. Open    4. Middle Click for handles    5. Bottom righ handle to resize full screen.    6. Top Red Menu drop down-> set as background    7. Middle click for handles    8. Top left X to close image    9. Your background should be set.<a id="org8735894"></a>## Compile Spur64 on Slackware Linux HOWTO    git clone http://github.com/OpenSmalltalk/vm oscogvm        cd oscogvm/scripts/        ./scripts/updateSCCSVersions        pushd building/linux64x64/squeak.cog.spur/build    ./mvm    sudo make install    popd            per email from Marcel        Hi Timothy --        After your Git checkout, you must do this once        ./scripts/updateSCCSVersions        Then see how the CI does it        scripts/ci/actions_prepare_linux_x86.sh    scripts/ci/actions_build.sh        And do it yourself:        pushd building/linux64x64/squeak.cog.spur/build    ./mvm    sudo make install    popd        Well, you can also do this before building:        pushd platforms/unix/config    make configure    popd        Best,    Marcel<a id="org6446a6a"></a>## Expired SSL Cert Issue In Monticello HOWTO        Context: On October 1 2021 Monticello would not let me open the squeaksource.com  repository.        After much emailing at the board, it was determined that ...    1. squeaksource.com uses a funky certificate provider or something.    2. the problem was on my (a typical user) side of things.    3. this website gives us hoops to jump through:  https://www.openssl.org/blog/blog/2021/09/13/LetsEncryptRootCertExpire/                This fix worked for me:        su root    cd /etc/ssl/certs.    update-ca-certificate    mv DST_Root_CA_X3.pem  ~/   (or delete it)<a id="org66babb3"></a>## RTPRIO warnings HOWTO<a id="orgfb5ba76"></a>## Blocks Try Catch Finally  HOWTO
